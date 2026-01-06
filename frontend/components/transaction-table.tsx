@@ -6,7 +6,7 @@ import { useState } from "react";
 import { PersonModel } from "@/lib/models/PersonModel";
 
 export default function TransactionsTable({ transactions }: TransactionsTableProps) {
-  const [selectedPersonId, setSelectedPersonId] = useState(null);
+  const [selectedPersonId, setSelectedPersonId] = useState<string | null>(null);
   console.log('ABCD-transactions', transactions)
   return (
     <div className="mx-auto px-6 pb-8 space-y-8">
