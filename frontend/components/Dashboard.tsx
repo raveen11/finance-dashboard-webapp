@@ -9,8 +9,12 @@ export default async function Dashboard() {
     const apiTransactions = await getTransactions();
     const totalTransaction = await getTotals();
     const transformedData = transformDashboardData(totalTransaction);
-    console.log('ABCD--',totalTransaction,transformedData)
-    const transactions = TransactionModel.fromApiArray(apiTransactions);
+    const transactionModels =
+        TransactionModel.fromApiArray(apiTransactions);
+
+    // ✅ convert to plain objects
+    const transactions =
+        TransactionModel.toPlainArray(transactionModels);
     return (
         <>
             <TotalFinance

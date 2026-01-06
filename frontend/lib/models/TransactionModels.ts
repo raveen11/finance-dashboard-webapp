@@ -45,4 +45,23 @@ export class TransactionModel implements Transaction {
   static fromApiArray(apiList: TransactionApi[]): TransactionModel[] {
     return apiList.map(TransactionModel.fromApi);
   }
+
+  toPlain(): Transaction {
+    return {
+      id: this.id,
+      type: this.type,
+      amount: this.amount,
+      personId: this.personId,
+      personName: this.personName,
+      notes: this.notes,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      purpose: this.purpose,
+      isMutual: this.isMutual,
+    };
+  }
+
+  static toPlainArray(models: TransactionModel[]): Transaction[] {
+    return models.map(m => m.toPlain());
+  }
 }

@@ -2,6 +2,8 @@ const Person = require('../models/Person');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const mongoose = require('mongoose');
+
 
 
 const createPerson = async (req, res) => {
@@ -33,4 +35,30 @@ const getAllPersons = async (req, res) => {
 };
 
 
-module.exports = { createPerson, getAllPersons };
+const getPersonById = async (req, res) => {
+
+  try {
+    const { id } = req.params;
+    const personId = new mongoose.Types.ObjectId(id);
+    const person = await Person.findById(personId);
+
+    if (!person) {
+      return res.status(404).json({
+        success: false,
+        message: 'Person not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      person,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { createPerson, getAllPersons, getPersonById };

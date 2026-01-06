@@ -49,3 +49,25 @@ export async function getAllPersons(): Promise<PersonsApi[]> {
     throw error; // rethrow so Next.js error boundary can catch it
   }
 }
+
+
+export async function getPersonById(id: string) {
+  const url = `http://localhost:5000/api/person/getById/${id}`;
+  try {
+    const response = await fetch(url,{
+      method:'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+    console.log('ABCD---person details',result);
+    return result;
+  } catch (error:any) {
+    console.error(error.message);
+  }
+}

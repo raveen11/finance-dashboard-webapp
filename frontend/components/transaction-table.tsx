@@ -1,48 +1,19 @@
+"use client"
 import { Transaction, TransactionsTableProps } from "@/types/transaction";
 import { ArrowDownLeft, ArrowUpRight, MoreHorizontal } from "lucide-react";
+import PersonDetailsModal from "./PersonDetailsModal";
+import { useState } from "react";
+import { PersonModel } from "@/lib/models/PersonModel";
 
 export default function TransactionsTable({ transactions }: TransactionsTableProps) {
+  const [selectedPersonId, setSelectedPersonId] = useState(null);
+  console.log('ABCD-transactions', transactions)
   return (
-    //    <div className="overflow-x-auto">
-    //   <table className="min-w-full divide-y divide-gray-200 border">
-    //     <thead className="bg-gray-50">
-    //       <tr>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">ID</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Type</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Amount</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Person</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Notes</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Created At</th>
-    //         <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">Updated At</th>
-    //       </tr>
-    //     </thead>
-
-    //     <tbody className="bg-white divide-y divide-gray-200">
-    //       {transactions.map((trans: Transaction) => (
-    //         <tr key={trans.id} className="hover:bg-gray-50">
-    //           <td className="px-4 py-2 text-sm text-gray-700">{trans.id}</td>
-    //           <td className="px-4 py-2 text-sm text-gray-700 capitalize">{trans?.type}</td>
-    //           <td className="px-4 py-2 text-sm text-gray-700">{trans?.amount || '0'}</td>
-    //           <td className="px-4 py-2 text-sm text-gray-700">{trans?.personName}</td>
-    //           <td className="px-4 py-2 text-sm text-gray-700">{trans?.notes || '-'}</td>
-    //           <td className="px-4 py-2 text-sm text-gray-500">
-    //             {new Date(trans?.createdAt).toLocaleString()}
-    //           </td>
-    //           <td className="px-4 py-2 text-sm text-gray-500">
-    //             {new Date(trans?.updatedAt).toLocaleString()}
-    //           </td>
-    //         </tr>
-    //       ))}
-    //     </tbody>
-    //   </table>
-    // </div>
     <div className="mx-auto px-6 pb-8 space-y-8">
       <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6 backdrop-blur-sm overflow-hidden">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-white">Transactions</h2>
-          <button className="text-slate-400 hover:text-slate-300">
-            <MoreHorizontal size={20} />
-          </button>
+         
         </div>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -76,8 +47,13 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
                       {tx?.type}
                     </span>
                   </td>
-                  <td className="py-4 px-4 text-white font-semibold">₹ {tx.amount.toLocaleString()}</td>
-                  <td className="py-4 px-4 text-slate-300">{tx.personName}</td>
+                  <td className="py-4 px-4 text-white font-semibold">₹ {tx.amount}</td>
+                  <td
+                    className="py-4 px-4 text-slate-300 cursor-pointer hover:underline hover:text-white transition-colors"
+                    onClick={() => setSelectedPersonId(tx.personId)}
+                  >
+                    {tx.personName}
+                  </td>    
                   <td className="py-4 px-4 text-slate-400 text-xs">{tx.notes}</td>
                   <td className="py-4 px-4 text-slate-400 text-xs">{new Date(tx?.createdAt).toLocaleString()}</td>
                   <td className="py-4 px-4 text-slate-400 text-xs">{new Date(tx?.updatedAt).toLocaleString()}</td>
@@ -87,6 +63,11 @@ export default function TransactionsTable({ transactions }: TransactionsTablePro
           </table>
         </div>
       </div>
+
+      <PersonDetailsModal
+        personId={selectedPersonId}
+        onClose={() => setSelectedPersonId(null)}
+      />
     </div>
   )
 }
