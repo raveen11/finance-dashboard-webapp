@@ -16,7 +16,7 @@ export default function Navbar() {
   const [showAddMember, setShowAddMember] = useState(false)
   const [showAddTransaction, setShowAddTransaction] = useState(false)
   const [members, setMembers] = useState<Array<{ id: string; name: string; email: string }>>([])
-  const [toastLoading, setToastLoading] = useState(undefined)
+  const [toastLoading, setToastLoading] = useState<string | undefined>(undefined)
   const [toastText, setToastText] = useState("");
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
