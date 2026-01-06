@@ -9,6 +9,7 @@ export default async function Dashboard() {
     const apiTransactions = await getTransactions();
     const totalTransaction = await getTotals();
     const transformedData = transformDashboardData(totalTransaction);
+    console.log('ABCBD-transformedData', totalTransaction, transformedData);
     const transactionModels =
         TransactionModel.fromApiArray(apiTransactions);
 

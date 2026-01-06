@@ -33,10 +33,10 @@ export interface TotalTransactionApi {
   totalDeposited: string;
   totalWithdrawn: string;
   totalInAccount: number;
-  withdrawnByPurpose: {
-    _id: string;
-    total: string;
-  };
+  withdrawnByPurpose:  Record<
+    "Personal Loan" | "Trading" | "Real State Investment" | "Others",
+    string
+  >;
 }
 
 

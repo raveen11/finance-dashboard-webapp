@@ -29,7 +29,7 @@ export async function getTransactions(): Promise<TransactionApi[]> {
 }
 
 
-export async function getTotals(): Promise<TotalTransactionApi[]> {
+export async function getTotals(): Promise<TotalTransactionApi> {
   const url = `http://localhost:5000/api/transaction/getTotalAmounts`;
 
   try {
@@ -46,7 +46,7 @@ export async function getTotals(): Promise<TotalTransactionApi[]> {
       throw new Error(`Response status: ${response?.status}`);
     }
 
-    const result: TotalTransactionApi[] = await response.json();
+    const result: TotalTransactionApi = await response.json();
     console.log('ABCD---totals fetched', result);
 
     return result;
