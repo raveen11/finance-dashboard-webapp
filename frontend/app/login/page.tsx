@@ -19,18 +19,17 @@ export default function LoginPage() {
     setError("")
     setIsLoading(true)
     const loginStatus= await logIn({email, password})
-    console.log('ABCCD-loginStatus',loginStatus);
-    setTimeout(() => {
-      if (loginStatus?.success) {
+    if (loginStatus?.success) {
         // Store auth state in localStorage (in production, use secure session)
         localStorage.setItem("isAuthenticated", "true")
         localStorage.setItem("userEmail", email)
+        console.log('ABCCD-loginStatus3',loginStatus); 
         router.push("/")
-      } else {
+    } else {
         setError("Email and password are Invalid!")
-      }
-      setIsLoading(false)
-    }, 500)
+    }
+    setIsLoading(false)
+    
   }
 
   return (

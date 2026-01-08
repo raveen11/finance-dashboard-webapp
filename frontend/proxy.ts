@@ -4,6 +4,7 @@ import type { NextRequest } from 'next/server'
 export default function proxy(request: NextRequest) {
   const authToken = request.cookies.get('authToken')?.value
   const { pathname } = request.nextUrl
+  console.log('ABCD------pathname',pathname,authToken)
 
   const isAuthPage = pathname === '/login' || pathname === '/signup'
 

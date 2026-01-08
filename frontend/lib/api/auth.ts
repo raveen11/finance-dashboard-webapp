@@ -1,6 +1,6 @@
 
 export async function logOut() {
-  const url = `https://finance-dashboard-webapp.onrender.com/api/auth/logout`;
+  const url = `/api/logout`;
   try {
     const response = await fetch(url,{
       method:'POST',
@@ -12,6 +12,11 @@ export async function logOut() {
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
+
+    localStorage.removeItem("isAuthenticated")
+    localStorage.removeItem("userEmail")
+    // Redirect to login page
+    window.location.href = "/login"
 
     const result = await response.json();
     return result
@@ -20,24 +25,22 @@ export async function logOut() {
   }
 }
 
-export async function logIn({email, password}: { email: string; password: string }) {
-  const url = `https://finance-dashboard-webapp.onrender.com/api/auth/login`;
+export async function logIn({ email, password }: { email: string; password: string }) {
   try {
-    const response = await fetch(url,{
-      method:'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
-      credentials: 'include',
-    });
+      credentials: "include", // must include to receive cookie
+    })
+
     if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
+      throw new Error(`Response status: ${response.status}`)
     }
 
-    const result = await response.json();
+    const result = await response.json()
     return result
-  } catch (error:any) {
-    console.error(error.message);
+  } catch (error: any) {
+    console.error("ABCD-err", error)
   }
 }

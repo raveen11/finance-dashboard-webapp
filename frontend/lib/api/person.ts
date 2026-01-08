@@ -24,7 +24,7 @@ import { PersonsApi } from "@/types/person";
 
 
 export async function getAllPersons(): Promise<PersonsApi[]> {
-  const url = `ps://finance-dashboard-webapp.onrender.com/api/person/getAll`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/person/getAll`;
 
   try {
     const response = await fetch(url, {
@@ -52,7 +52,7 @@ export async function getAllPersons(): Promise<PersonsApi[]> {
 
 
 export async function getPersonById(id: string) {
-  const url = `/finance-dashboard-webapp.onrender.com/api/person/getById/${id}`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/person/getById/${id}`;
   try {
     const response = await fetch(url,{
       method:'GET',
