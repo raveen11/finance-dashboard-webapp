@@ -2,7 +2,7 @@
 import { TotalTransactionApi, TransactionApi } from '@/types/transaction';
 
 export async function getTransactions(): Promise<TransactionApi[]> {
-  const url = `http://localhost:5000/api/transaction/getAll`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/transaction/getAll`;
 
   try {
     const response = await fetch(url, {
@@ -30,7 +30,7 @@ export async function getTransactions(): Promise<TransactionApi[]> {
 
 
 export async function getTotals(): Promise<TotalTransactionApi> {
-  const url = `http://localhost:5000/api/transaction/getTotalAmounts`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/transaction/getTotalAmounts`;
 
   try {
     const response = await fetch(url, {
@@ -58,7 +58,7 @@ export async function getTotals(): Promise<TotalTransactionApi> {
 
 
 export async function createTransaction(formData: any) {
-  const url = `http://localhost:5000/api/transaction/create`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/transaction/create`;
   try {
     const response = await fetch(url,{
       method:'POST',

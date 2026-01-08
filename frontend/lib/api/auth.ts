@@ -1,6 +1,6 @@
 
 export async function logOut() {
-  const url = `http://localhost:5000/api/auth/logout`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/auth/logout`;
   try {
     const response = await fetch(url,{
       method:'POST',
@@ -21,7 +21,7 @@ export async function logOut() {
 }
 
 export async function logIn({email, password}: { email: string; password: string }) {
-  const url = `http://localhost:5000/api/auth/login`;
+  const url = `https://finance-dashboard-webapp.onrender.com/api/auth/login`;
   try {
     const response = await fetch(url,{
       method:'POST',
