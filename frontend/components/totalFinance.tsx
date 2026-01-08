@@ -31,8 +31,12 @@ interface TotalFinanceProps {
 const TotalFinance: React.FC<TotalFinanceProps> = ({
   transformedData,
 }) => {
+  const userName= localStorage?.getItem("userEmail")?.split('@')?.[0]
+
   return (
+    <>
     <div className="mx-auto px-6 py-8 space-y-8">
+              <p className="text-slate-400 text-sm mt-1">Welcome {userName}, manage your finances</p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {transformedData.totalAmountArray.map((item, index) => (
           <StatCard
@@ -70,6 +74,8 @@ const TotalFinance: React.FC<TotalFinanceProps> = ({
         </div>
       </div>
     </div>
+    </>
+
   );
 };
 

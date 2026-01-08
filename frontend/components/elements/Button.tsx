@@ -16,6 +16,7 @@ interface ButtonProps {
 
   disabled?: boolean;
   className?: string;
+  textClassName?: string;
 }
 
 const colorClasses: Record<ButtonColor, string> = {
@@ -34,6 +35,7 @@ export default function Button({
   height = "h-10",
   disabled = false,
   className = "",
+  textClassName="",
 }: ButtonProps) {
   return (
     <button
@@ -50,7 +52,7 @@ export default function Button({
       `}
     >
       {prefixIcon && <span className="flex items-center">{prefixIcon}</span>}
-      {text}
+      <span className={textClassName}>{text}</span>
     </button>
   );
 }

@@ -1,5 +1,5 @@
 "use client"
-import { LogOut } from "lucide-react";
+import { LogOut,User, Wallet } from "lucide-react";
 import { useEffect, useState } from "react";
 import Button from "./elements/Button";
 import { logOut } from "@/lib/api/auth";
@@ -75,6 +75,8 @@ console.log('ABCD-members',members)
 
   }
 
+  const userName= localStorage?.getItem("userEmail")?.split('@')?.[0]
+
   const handleLogout = async () => {
     try {
       setLoading(true);
@@ -98,34 +100,33 @@ console.log('ABCD-members',members)
   return (
     <>
       <header className="sticky top-0 z-50 border-b border-slate-700/50 backdrop-blur-md bg-slate-900/80">
-        <div className="mx-auto px-6 py-4">
+        <div className="mx-auto px-6 sm:px-4 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-2xl font-bold text-white">Finance Dashboard</h1>
-              <p className="text-slate-400 text-sm mt-1">Welcome back, manage your finances</p>
-
+              <h1 className="text-2xl font-bold text-white">Our Finance</h1>
+              <p className="text-slate-400 text-sm mt-1">Welcome {userName}, manage your finances</p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 sm:gap-4">
               <Button
                 text="Add Member"
                 onClick={() => setShowAddMember(true)}
                 color="emerald"
-                prefixIcon={"+"}
+                prefixIcon={<User size={20} />}
                 width="w-auto"
                 height="h-10"
                 disabled={false}
-                className=""
+                textClassName="hidden sm:inline"
               />
 
               <Button
                 text="Add Transaction"
                 onClick={() => {setShowAddTransaction(true)}}
                 color="blue"
-                prefixIcon={"+"}
+                prefixIcon={<Wallet size={20} />}
                 width="w-auto"
                 height="h-10"
                 disabled={false}
-                className=""
+                textClassName="hidden sm:inline"
               />
 
 
@@ -135,7 +136,7 @@ console.log('ABCD-members',members)
                 title="Logout"
               >
                 <LogOut size={20} />
-                <span className="text-sm font-medium">Logout</span>
+                <span className="text-sm font-medium hidden sm:inline">Logout</span>
               </button>
             </div>
           </div>
