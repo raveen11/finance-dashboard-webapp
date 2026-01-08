@@ -22,6 +22,15 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
+  const [userName, setUserName] = useState<string | null>(null);
+
+  useEffect(() => {
+    const email = localStorage.getItem("userEmail");
+    if (email) {
+      setUserName(email.split("@")[0]);
+    }
+  }, []);
+
  useEffect(() => {
   // define an async function inside useEffect
   const fetchMembers = async () => {
@@ -75,7 +84,6 @@ console.log('ABCD-members',members)
 
   }
 
-  const userName= localStorage?.getItem("userEmail")?.split('@')?.[0]
 
   const handleLogout = async () => {
     try {
